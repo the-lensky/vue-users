@@ -1,25 +1,35 @@
 <template>
-  <div class="users">
+  <div v-if="isShowUsers" class="users">
     <user-column />
     <user
         v-for="user in users"
         :key="user.id"
         :user="user"
+        @handleUserCheckbox="handleUserCheckbox"
     />
+    <toolbox :checkedUsers="checkedUsers" />
   </div>
+  <div v-else>No users</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import UserColumn from './components/UserColumn.vue'
 import User from './components/User.vue'
+import Toolbox from './components/Toolbox.vue'
 
 export default {
-  components: { UserColumn, User },
+  components: { UserColumn, User, Toolbox },
   data() {
-    return {}
+    return {
+      checkedUsers: []
+    }
   },
+
   computed: {
+    isShowUsers() {
+      return Boolean(this.users.length)
+    },
     ...mapGetters([
       'users'
     ])
@@ -28,8 +38,12 @@ export default {
   methods: {
     init() {
       this.$store.dispatch('getUsers', true)
-      console.log('======', this.$store.state.users)
     },
+    handleUserCheckbox(status, id) {
+      status
+          ? this.checkedUsers.push(id)
+          : this.checkedUsers = this.checkedUsers.filter(userId => userId !== id)
+    }
   },
   mounted() {
     this.init()

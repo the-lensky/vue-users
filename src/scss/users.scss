@@ -5,7 +5,7 @@
 .user {
   &-row {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     border: 1px solid $accentColor;
   }
 
@@ -13,5 +13,17 @@
     max-width: 300px;
     width: 100%;
     padding: $m;
+  }
+
+  &-add {
+    background-color: $accentColor;
+    border-radius: $sm;
+    padding: $l;
+    cursor: pointer;
+  }
+
+  &-checkbox {
+    max-width: 1rem;
+    width: 100%;
   }
 }

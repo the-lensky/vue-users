@@ -17,7 +17,6 @@ export const users = {
         async getUsers({ commit }) {
             try {
                 const response = await UserService.getUsers()
-                console.log(response?.data)
                 commit(types.USERS_FETCH, response.data)
 
                 return response
@@ -26,11 +25,19 @@ export const users = {
                 console.log('UserService Error getUsers', err)
             }
         },
+
+        deleteUsers({ commit }, usersForDelete) {
+            commit(types.USERS_DELETE, usersForDelete)
+        }
     },
 
     mutations: {
         [types.USERS_FETCH](state, users) {
             state.users = users
+        },
+
+        [types.USERS_DELETE](state, usersForDelete) {
+            state.users = state.users.filter(user => !usersForDelete.includes(user.id))
         },
 
     }
