@@ -34,10 +34,14 @@ export default {
       'users'
     ])
   },
-  watch: {},
   methods: {
     init() {
-      this.$store.dispatch('getUsers', true)
+      const users = JSON.parse(localStorage.getItem('users')) || []
+
+      users.length
+          ? this.$store.dispatch('setUsers', users)
+          : this.$store.dispatch('getUsers')
+
     },
     handleUserCheckbox(status, id) {
       status
