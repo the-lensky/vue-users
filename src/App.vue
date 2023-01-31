@@ -1,7 +1,21 @@
+<template>
+  <div class="users">
+    <user-column />
+    <user
+        v-for="user in users"
+        :key="user.id"
+        :user="user"
+    />
+  </div>
+</template>
+
 <script>
 import { mapGetters } from 'vuex'
+import UserColumn from './components/UserColumn.vue'
+import User from './components/User.vue'
 
 export default {
+  components: { UserColumn, User },
   data() {
     return {}
   },
@@ -22,18 +36,3 @@ export default {
   },
 }
 </script>
-
-<template>
-  <div class="user">
-    <div
-        class="user-row"
-        v-for="user in users"
-    >
-      {{ user.name }}
-    </div>
-  </div>
-</template>
-
-
-<style lang="scss">
-</style>

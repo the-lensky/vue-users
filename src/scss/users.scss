@@ -1,2 +1,17 @@
 @import "src/scss/colors";
 @import "src/scss/indents";
+
+
+.user {
+  &-row {
+    display: flex;
+    justify-content: center;
+    border: 1px solid $accentColor;
+  }
+
+  &-cell {
+    max-width: 300px;
+    width: 100%;
+    padding: $m;
+  }
+}

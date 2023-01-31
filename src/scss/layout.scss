@@ -1,5 +1,6 @@
 @import "src/scss/colors";
 @import "src/scss/indents";
+@import "src/scss/typography";
 
 body {
   margin: 0;
@@ -12,6 +13,10 @@ body {
   max-width: 1280px;
   margin: 0 auto;
   padding: $m;
-  font-size: $m;
+  font-size: $textM;
   color: $white;
+}
+
+.mbM {
+  margin-bottom: $m;
 }
