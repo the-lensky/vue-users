@@ -21,15 +21,11 @@ export default {
 </script>
 
 <template>
-  <header>
-    Hi
-  </header>
-
-  <main>
-    there
-  </main>
+  <div class="one">1</div>
+  <div class="two">2</div>
+  <div class="3">3</div>
 </template>
 
-<style scoped>
 
+<style lang="scss">
 </style>
