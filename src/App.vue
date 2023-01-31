@@ -6,12 +6,15 @@ export default {
     return {}
   },
   computed: {
-    ...mapGetters([])
+    ...mapGetters([
+      'users'
+    ])
   },
   watch: {},
   methods: {
     init() {
-      this.$store.dispatch('initUsers', true)
+      this.$store.dispatch('getUsers', true)
+      console.log('======', this.$store.state.users)
     },
   },
   mounted() {
@@ -21,9 +24,14 @@ export default {
 </script>
 
 <template>
-  <div class="one">1</div>
-  <div class="two">2</div>
-  <div class="3">3</div>
+  <div class="user">
+    <div
+        class="user-row"
+        v-for="user in users"
+    >
+      {{ user.name }}
+    </div>
+  </div>
 </template>
 
 
