@@ -3,6 +3,7 @@ export const USERS_LOADING_FINISH = 'USERS_LOADING_FINISH'
 
 export const USERS_FETCH = 'USERS_FETCH'
 export const USERS_DELETE = 'USERS_DELETE'
+export const USERS_ADD = 'USERS_ADD'
 
 
 

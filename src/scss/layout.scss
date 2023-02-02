@@ -24,3 +24,8 @@ body {
 .mbM {
   margin-bottom: $m;
 }
+
+input[type='checkbox'] {
+  width: $m;
+  height: $m;
+}

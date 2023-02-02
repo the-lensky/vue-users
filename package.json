@@ -8,7 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vee-validate/rules": "^4.7.3",
     "axios": "^1.2.6",
+    "maska": "^2.1.6",
+    "uuid": "^9.0.0",
+    "vee-validate": "^4.7.3",
     "vue": "^3.2.45",
     "vuex": "^4.0.2"
   },

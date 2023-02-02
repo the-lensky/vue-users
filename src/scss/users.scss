@@ -6,6 +6,8 @@
   &-row {
     display: flex;
     justify-content: start;
+    align-items: center;
+
     border: 1px solid $accentColor;
   }
 
@@ -13,17 +15,41 @@
     max-width: 300px;
     width: 100%;
     padding: $m;
+
+    &_btn {
+      max-width: 100px;
+    }
   }
 
   &-add {
     background-color: $accentColor;
     border-radius: $sm;
-    padding: $l;
+    padding: $m;
     cursor: pointer;
   }
 
   &-checkbox {
     max-width: 1rem;
     width: 100%;
+  }
+
+  &-toolbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid $accentColor;
+    gap: $m;
+    padding: $m;
+  }
+
+  &-search-wrap {
+    display: flex;
+    align-items: self-end;
+    gap: $m;
+  }
+
+  &-search {
+    width: 300px;
+    height: $l;
   }
 }

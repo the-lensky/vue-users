@@ -31,13 +31,22 @@ export const users = {
             localStorage.setItem('users', JSON.stringify(users))
 
             commit(types.USERS_DELETE, users)
-        }
+        },
+        addUser({ state, commit, }, userForAdd) {
+            const users = [...state.users, userForAdd]
+            localStorage.setItem('users', JSON.stringify(users))
+
+            commit(types.USERS_ADD, users)
+        },
     },
     mutations: {
         [types.USERS_FETCH](state, users) {
             state.users = users
         },
         [types.USERS_DELETE](state, users) {
+            state.users = users
+        },
+        [types.USERS_ADD](state, users) {
             state.users = users
         },
     }
