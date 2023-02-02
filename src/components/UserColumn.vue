@@ -8,9 +8,6 @@
       />
     </div>
     <div class="user-cell textL" v-for="column in columns">{{ column.title }}</div>
-    <div class="user-cell_btn">
-      <button class="user-add" @click="handleAddUser">Add</button>
-    </div>
   </div>
 </template>
 <script>
@@ -25,9 +22,6 @@ export default {
   methods: {
     handleAllCheckbox() {
       this.$emit('handleAllCheckbox', this.checkedAllStatus)
-    },
-    handleAddUser() {
-      this.$emit('handleAddUser')
     },
   },
 }

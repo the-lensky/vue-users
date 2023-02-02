@@ -1,16 +1,18 @@
 <template>
   <div class="user-row">
     <div class="user-cell">
-      <button @click="handleSort('name')">Name</button>
+      <button class="user-add" @click="handleSort('name')">Name</button>
     </div>
     <div class="user-cell">
-      <button @click="handleSort('email')">Email</button>
+      <button class="user-add" @click="handleSort('email')">Email</button>
     </div>
     <div class="user-cell">
-      <button @click="handleSort('phone')">Phone</button>
+      <button class="user-add" @click="handleSort('phone')">Phone</button>
     </div>
     <div class="user-cell">
-      <button>Add</button>
+      <div class="user-cell_btn">
+        <button class="user-add" @click="handleAddUser">Add User</button>
+      </div>
     </div>
   </div>
 </template>
@@ -30,7 +32,10 @@ export default {
       }
       this.currentSort = s
       this.$emit('handleSort', this.currentSort, this.currentSortDir)
-    }
+    },
+    handleAddUser() {
+      this.$emit('handleAddUser')
+    },
   },
 }
 </script>

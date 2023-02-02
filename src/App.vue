@@ -3,10 +3,10 @@
     <actions
         :usersToShow="usersToShow"
         @handleSort="handleSort"
+        @handleAddUser="handleAddUser"
     />
     <user-column
         @handleAllCheckbox="handleAllCheckbox"
-        @handleAddUser="handleAddUser"
     />
     <user
         v-for="user in usersToShow"
