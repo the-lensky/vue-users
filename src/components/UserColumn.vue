@@ -13,10 +13,22 @@
 <script>
 
 export default {
+  props: {
+    isCheckAll: { type: Boolean, required: true },
+  },
   data() {
     return {
       checkedAllStatus: false,
       columns: [{ title: 'Full Name' }, { title: 'Email' }, { title: 'Phone' }]
+    }
+  },
+  watch: {
+    'isCheckAll'(val) {
+      if(!val) {
+        this.checkedAllStatus = val
+      } else {
+        return this.checkedAllStatus
+      }
     }
   },
   methods: {

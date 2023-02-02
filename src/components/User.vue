@@ -3,7 +3,7 @@
     <div class="user-cell user-checkbox">
       <input
           type="checkbox"
-          v-model="checkedStatus"
+          v-model="checked"
           @change="handleUserCheckbox"
       />
     </div>
@@ -16,21 +16,32 @@
 <script>
 export default {
   props: {
-    user: { type: Object, required: true }
+    user: { type: Object, required: true },
+    isCheckAll: { type: Boolean, required: true },
   },
 
   data() {
     return {
-      checkedStatus: false
+      checked: false,
     }
   },
-
-  watch: {},
+  watch: {
+    'isCheckAll'(val) {
+      if(!val) {
+        this.checked = false
+      } else {
+        this.checked = true
+      }
+    }
+  },
   methods: {
     handleUserCheckbox() {
-      this.$emit('handleUserCheckbox', this.checkedStatus, this.user.id)
+      if(this.isCheckAll) {
+        this.$emit('handleUserCheckbox', false, this.user.id)
+      } else {
+        this.$emit('handleUserCheckbox', this.checked, this.user.id)
+      }
     },
   },
-
 }
 </script>

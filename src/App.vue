@@ -6,12 +6,15 @@
         @handleAddUser="handleAddUser"
     />
     <user-column
+        :isCheckAll="isCheckAll"
         @handleAllCheckbox="handleAllCheckbox"
     />
     <user
         v-for="user in usersToShow"
         :key="user.id"
         :user="user"
+        :isCheckAll="isCheckAll "
+        :checkedUsers="checkedUsers"
         @handleUserCheckbox="handleUserCheckbox"
     />
     <toolbox
@@ -42,21 +45,13 @@ export default {
     return {
       checkedUsers: [],
       usersToShow: [],
-      isShowAddUser: false
+      isShowAddUser: false,
+      isCheckAll: false,
     }
   },
   computed: {
     isShowUsers() {
       return Boolean(this.users.length)
-    },
-    sortedData() {
-      return this.usersToShow.sort((a, b) => {
-        let modifier = 1
-        if(this.currentSortDir === 'desc') modifier = -1
-        if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier
-        if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier
-        return 0
-      })
     },
     ...mapGetters([
       'users'
@@ -76,19 +71,36 @@ export default {
           : this.$store.dispatch('getUsers')
     },
     handleUserCheckbox(status, id) {
-      status
-          ? this.checkedUsers.push(id)
-          : this.checkedUsers = this.checkedUsers.filter(userId => userId !== id)
+      if(!status) {
+        this.isSelectedAll = false
+        this.checkedUsers = this.checkedUsers.filter(userId => userId !== id)
+      } else {
+        this.checkedUsers.push(id)
+      }
     },
     handleAllCheckbox(status) {
-      status
-          ? this.selectAllUsers()
-          : this.unSelectAllUsers()
+      this.isCheckAll = !this.isCheckAll
+      this.checkedUsers = []
+      if(this.isCheckAll) {
+        for (let i = 0; i < this.users.length; i++) {
+          this.checkedUsers.push(this.users[i].id)
+        }
+      }
+      // this.isSelectedAll = status
+      // status
+      //     ? this.selectAllUsers()
+      //     : this.unSelectAllUsers()
+    },
+    updateCheckall() {
+      if(this.checkedUsers.length == this.users.length) {
+        this.isCheckAll = true
+      } else {
+        this.isCheckAll = false
+      }
     },
     selectAllUsers() {
-      const allCheckedUsers = []
+      this.checkedUsers = []
       this.users.forEach(user => this.checkedUsers.push(user.id))
-      this.checkedUsers = allCheckedUsers
     },
     unSelectAllUsers() {
       this.checkedUsers = []
