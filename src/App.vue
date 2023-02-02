@@ -1,5 +1,9 @@
 <template>
   <div v-if="isShowUsers" class="users">
+    <actions
+        :usersToShow="usersToShow"
+        @handleSort="handleSort"
+    />
     <user-column
         @handleAllCheckbox="handleAllCheckbox"
         @handleAddUser="handleAddUser"
@@ -8,7 +12,6 @@
         v-for="user in usersToShow"
         :key="user.id"
         :user="user"
-        :isCheckedAll="isCheckedAll"
         @handleUserCheckbox="handleUserCheckbox"
     />
     <toolbox
@@ -31,9 +34,10 @@ import UserColumn from './components/UserColumn.vue'
 import User from './components/User.vue'
 import Toolbox from './components/Toolbox.vue'
 import AddUser from './components/AddUser.vue'
+import Actions from './components/Actions.vue'
 
 export default {
-  components: { UserColumn, User, Toolbox, AddUser },
+  components: { Actions, UserColumn, User, Toolbox, AddUser },
   data() {
     return {
       checkedUsers: [],
@@ -45,19 +49,21 @@ export default {
     isShowUsers() {
       return Boolean(this.users.length)
     },
-    isCheckedAll() {
-      return Boolean()
+    sortedData() {
+      return this.usersToShow.sort((a, b) => {
+        let modifier = 1
+        if(this.currentSortDir === 'desc') modifier = -1
+        if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier
+        if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier
+        return 0
+      })
     },
-    // usersToShow() {
-    //
-    // },
     ...mapGetters([
       'users'
     ])
   },
   watch: {
     'users'(val) {
-      console.log(val)
       this.usersToShow = val
     }
   },
@@ -103,6 +109,15 @@ export default {
             user.email?.toLowerCase().includes(filterValue) ||
             user.phone?.toLowerCase().includes(filterValue)
         )
+      })
+    },
+    handleSort(sort, dir) {
+      return this.usersToShow.sort((a, b) => {
+        let modifier = 1
+        if(dir === 'desc') modifier = -1
+        if(a[sort] < b[sort]) return -1 * modifier
+        if(a[sort] > b[sort]) return 1 * modifier
+        return 0
       })
     }
   },
